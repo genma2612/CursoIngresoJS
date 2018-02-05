@@ -4,6 +4,11 @@
 */
 function Mostar()
 {
+	var dato;
+	dato = prompt("Ingresar dato");
+	
+
+
 	
 }
 
