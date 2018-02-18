@@ -1,7 +1,7 @@
 function Mostrar()
 {
 	var numero
-	numero = Math.floor(Math.random() * (10 - 1)) + 1;
+	numero = Math.floor(Math.random() * (11 - 1)) + 1;
 	if(numero >= 9){
 		alert("Nota = " + numero + " Exelente")
 	}

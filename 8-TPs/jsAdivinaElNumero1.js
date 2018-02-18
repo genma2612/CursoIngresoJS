@@ -13,25 +13,32 @@ var contadorIntentos;
 function comenzar()
 {
   numeroSecreto = Math.floor(Math.random() * (101 - 1)) + 1;
-  console.log(numeroSecreto)
-	//Genero el número RANDOM entre 1 y 100
-	 
-		//alert(numeroSecreto );
-	
-
+  console.log(numeroSecreto);
+  contadorIntentos = 0;                                               //  para que siempre 
+  document.getElementById("intentos").value = contadorIntentos;       //  comience con 0 intentos
 }
 
 function verificar()
 {
-  var numeroIngresado
+  var numeroIngresado;
+  contadorIntentos = contadorIntentos + 1;
   numeroIngresado = document.getElementById("numero").value;
-  numeroIngresado = parseInt(numeroIngresado);
-  if(numeroIngresado == numeroSecreto ){
-    alert("Has ganado!")
+  document.getElementById("intentos").value = contadorIntentos;
+  if(numeroIngresado == numeroSecreto && contadorIntentos == 1){
+    alert("Acertaste a la 1ra? Habrás hecho trampa! comenzá de nuevo.")
+  }
+  else if(contadorIntentos > 10){
+    alert("Alcanzaste el máximo de intentos, comenzá de nuevo.")
+    contadorIntentos = 11;                                            //  Para que no siga
+    document.getElementById("intentos").value = contadorIntentos;     //  aumentando el contador.
+  }
+  else if(numeroIngresado == numeroSecreto ){
+    alert("Ganaste con " + contadorIntentos + " intentos!")
   }
   else if(numeroIngresado < numeroSecreto){
-    
+    alert("Perdiste! El numero secreto es mayor.")
   }
-	
-	
+  else if(numeroIngresado > numeroSecreto){
+    alert("Perdiste! El numero secreto es menor.")
+  }
 }
