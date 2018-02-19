@@ -25,9 +25,11 @@ function verificar()
   numeroIngresado = document.getElementById("numero").value;
   document.getElementById("intentos").value = contadorIntentos;
   if(numeroIngresado == numeroSecreto && contadorIntentos == 1){
-    alert("Acertaste a la 1ra? Habrás hecho trampa! comenzá de nuevo.")
+    //alert("Acertaste a la 1ra? Habrás hecho trampa! comenzá de nuevo.")
+
   }
   else if(contadorIntentos > 10){
+    //numeroSecreto = null
     alert("Alcanzaste el máximo de intentos, comenzá de nuevo.")
     contadorIntentos = 11;                                            //  Para que no siga
     document.getElementById("intentos").value = contadorIntentos;     //  aumentando el contador.
