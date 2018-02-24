@@ -1,7 +1,11 @@
 function Mostrar()
 {
-
-
-
-
-}//FIN DE LA FUNCIÓN
+    for(var numero = 0 ; ; numero++)
+    {
+        console.log(numero);
+        if(numero == 1000)
+        {
+            break;
+        }
+    }
+}

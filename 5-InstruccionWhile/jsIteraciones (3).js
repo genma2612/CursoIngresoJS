@@ -1,10 +1,13 @@
 function Mostrar()
 {
-    var clave = prompt("ingrese el número clave.");
-    while(clave != "utn750" && clave != null)
+    do{
+        clave = prompt("ingrese el número clave.")
+    } while (clave!= "utn750" && clave != null);
+    /*var clave = prompt("ingrese el número clave.");
+    while (clave!= "utn750" && clave != null)
     {
         clave = prompt("Error, ingrese su clave")
-    }
+    }*/
 }
 
 /*function Mostrar()
@@ -17,4 +20,4 @@ function Mostrar()
         }
         clave = prompt("Error, ingrese su clave")
     }
-}/*
+}*/
