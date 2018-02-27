@@ -12,7 +12,5 @@ function Mostrar()
     perimetro = largo * 2 + ancho * 2;
     cantAlambre = perimetro * 6;
     alert("Se necesitan " + cantAlambre + " metros de alambre.");
-
-
 }
 
