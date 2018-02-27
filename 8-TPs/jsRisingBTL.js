@@ -9,24 +9,12 @@ F.	Nacionalidad, “A” para argentinos, “E” para extranjeros, “N” para
  */
 function ComenzarIngreso () 
 {
-    var edad               
-    var sexo           
-    var estadoCivil            
-    var sueldo                    
-    var legajo                
-    var nacionalidad
+    var edad, sexo, estadoCivil, sueldo , legajo , nacionalidad;
+    var sueldoMaxN=0, sueldoMaxFA=0, sueldoMaxF=0, edadSueldoMaxF=0, cantSueldoM12000=0, AMenorSueldo=1000000, legAMenorSueldo=0;
+    var contadorM=0, sueldoAcuM=0, sueldoPromedioM=0, sueldoPromedioMNeto=0;
+    var contadorF=0, sueldoAcuF=0, sueldoPromedioF=0, sueldoPromedioFNeto=0; 
+    var contadorTotal=0, sueldoAcuTotal=0, sueldoPromedioTotal=0, sueldoPromedioTotalNeto=0;
     var respuesta=true;
-    var sueldoMaxN=0;
-    var sueldoMaxFA=0;
-    var edadSueldoMaxFA=0;
-    var contadorM
-    var sueldoAcuM=0;
-    var sueldoPromedioM
-    var sueldoPromedioMNeto=0;
-    var contadorF
-    var sueldoAcuF=0;
-    var sueldoPromedioFNeto=0;
-    var sueldoPromedioTotal=0;
     while(respuesta){
         do{
             edad = prompt("ingresar la edad (Entre 18 y 90 años inclusive)");
@@ -46,7 +34,7 @@ function ComenzarIngreso ()
                 break;
             }
             document.getElementById("Sexo").value = sexo;
-        } while (sexo != "M" && sexo != "F");
+        } while (sexo.toLowerCase() != "m" && sexo.toLowerCase() != "f");
         do{
             estadoCivil = prompt("Ingrese su estado civil: 1-soltero/a, 2-casado/a, 3-divorciado/a, 4-viudo/a")
             if(estadoCivil == null)
@@ -108,88 +96,102 @@ function ComenzarIngreso ()
             }
             switch(nacionalidad)
             {
-                case "A":
+                case "a":
                 {
                     document.getElementById("Nacionalidad").value = "Argentino/a"
                     break;
                 }
-                case "E":
+                case "e":
                 {
                     document.getElementById("Nacionalidad").value = "Extranjero/a"
                     break; 
                 }
-                case "N":
+                case "n":
                 {
                     document.getElementById("Nacionalidad").value = "Nacionalizado/a"
                     break; 
                 }
                 default:
             }
-        } while (nacionalidad != "A" && nacionalidad != "E" && nacionalidad != "N");
+        } while (nacionalidad.toLowerCase() != "a" && nacionalidad.toLowerCase() != "e" && nacionalidad.toLowerCase() != "n");
+        contadorTotal++
+        sueldoAcuTotal = sueldoAcuTotal + sueldo
         if(sexo == "M")
         {
-            if(nacionalidad == "A")
+            if(sueldo > 12000)
             {
-                
+                cantSueldoM12000++
             }
-            else if(nacionalidad == "E")
-            {
-
-            }
-            else if(nacionalidad == "N")
-            {
-
-            }
-        }
-        else if(sexo == "F")
-        {
-            if(nacionalidad == "A")
-            {
-                
-            }
-            else if(nacionalidad == "E")
-            {
-
-            }
-            else if(nacionalidad == "N")
-            {
-                
-            }
-
-        }
-        /*if(nacionalidad == "N")
-        {
-            if(sueldo > sueldoMaxN)
-            {
-            sueldoMaxN = sueldo;
-            }
-        }
-        else if(nacionalidad == "A")
-        {
-            if(sexo == "F" && sueldo > sueldomaxFA)
-            {
-                sueldoMaxFA = sueldo;
-                edadSueldoMaxFA = edad;
-            }
-        }
-        else if(sexo == "F" && nacionalidad == "A" && sueldo > sueldoMaxFA)
-        {
-            sueldoMaxFA = sueldo;
-            edadSueldoMaxFA = edad;
-        }
-        else if(sexo == "M")
-        {
             contadorM++
             sueldoAcuM = sueldoAcuM + sueldo
+            if(nacionalidad == "A")
+            {
+                if(sueldo < AMenorSueldo)
+                {
+                    AMenorSueldo = sueldo
+                    legAMenorSueldo = legajo
+                }
+            }
+            else if(nacionalidad == "E")
+            {
+
+            }
+            else if(nacionalidad == "N")
+            {
+                if(sueldo > sueldoMaxN)
+                {
+                    sueldoMaxN = sueldo
+                }
+            }
         }
         else if(sexo == "F")
         {
+            if(sueldo > sueldoMaxF)
+            {
+                edadSueldoMaxF = edad
+            }
             contadorF++
             sueldoAcuF = sueldoAcuF + sueldo
-        }*/
+            if(nacionalidad == "A")
+            {
+                if(sueldo > sueldoMaxFA)
+                {
+                    sueldoMaxFA = sueldo
+                }
+                    if(sueldo < AMenorSueldo)
+                    {
+                        AMenorSueldo = sueldo
+                        legAMenorSueldo = legajo
+                    }
+            }
+            else if(nacionalidad == "E")
+            {
+
+            }
+            else if(nacionalidad == "N")
+            {
+                if(sueldo > sueldoMaxN)
+                {
+                    sueldoMaxN = sueldo
+                }
+            }
+
+        }
         respuesta = confirm("Continuar ingresando datos?");
     }
+    sueldoPromedioM = sueldoAcuM / contadorM
+    sueldoPromedioMNeto = sueldoPromedioM * 0.75
+    sueldoPromedioF = sueldoAcuF / contadorF
+    sueldoPromedioFNeto = sueldoPromedioF * 0.75
+    sueldoPromedioTotal = sueldoAcuTotal / contadorTotal
+    sueldoPromedioTotalNeto = sueldoPromedioTotal * 0.75
     console.log("Mayor sueldo de Nacionalizados: " + sueldoMaxN)
     console.log("Mayor sueldo de sexo F y nacionalidad Argentina: " + sueldoMaxFA)
-    console.log("Sueldo promedio M: " + (sueldoacuM / contadorM))
+    console.log("Sueldo promedio M: " + sueldoPromedioM + " bruto y " + sueldoPromedioMNeto + " neto.")
+    console.log("Sueldo promedio F: " + sueldoPromedioF + " bruto y " + sueldoPromedioFNeto + " neto.")
+    console.log("Sueldo promedio Total: " + sueldoPromedioTotal + " bruto y " + sueldoPromedioTotalNeto + " neto.")
+    console.log("Masculinos que cobran más de 12000 : " + cantSueldoM12000)
+    console.log("Edad de la persona F con sueldo máximo: " + edadSueldoMaxF)
+    console.log("Legajo de la persona Argentina con menor sueldo: " + legAMenorSueldo)
+    
 }
